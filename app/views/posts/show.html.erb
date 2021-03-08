@@ -29,10 +29,53 @@
             <div class="content">
               <table class="table is-narrow">
                 <tr>
-                  <th>🌹説明🌹</th>
-                </tr>
+                  <th>🌹説明🌹｜ 
+                  <span><%= link_to "#{@post.post_comments.count} コメント", post_path(@post.id)  %></span>
+                  
+                  
+                          <% if @post.favorited_by?(current_user) %>
+                          
+                            <%= link_to post_favorites_path(@post), method: :delete do %>
+                              ♥<%= @post.favorites.count %> いいね
+                            <% end %>
+                          
+                          <% else %>
+                          
+                            <%= link_to post_favorites_path(@post), method: :post do %>
+                              ♡<%= @post.favorites.count %> いいね
+                            <% end %>
+                          
+                        <% end %>
+                        </p>
+                  </th>
+
+
                 <tr>
-                  <td><%= simple_format @post.body %></td>
+                  <td><%= simple_format @post.body %>
+                  
+                        <div class="comments">
+                        <p>
+                        <% @post.post_comments.each do |post_comment| %>
+                          <div class="text-line1">
+                          <%= post_comment.user.username %>
+                          <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+                          <%= post_comment.comment %>
+                          <% if post_comment.user == current_user %>
+                            <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete %>
+                          <% end %>
+                          </div>
+
+                          
+
+                        <% end %>
+                        </div>
+                        <div class="new-comment">
+                        <%= form_for [@post, @post_comment], local: true do |f| %>
+                          <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+                          <%= f.submit "送信する" %>
+                        <% end %>
+                  </div>
+                </tr></td>
                 </tr>
               </table>
               <% if @post.user.id == current_user.id %>
