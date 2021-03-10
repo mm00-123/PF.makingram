@@ -15,15 +15,14 @@
   <div class="container">
     <div class="columns is-multiline">
 
-                    <%= form_tag posts_path, method: :get, class: 'boards__searchForm' do %>
-                    <%= select_tag :tag_id,
-                                   options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]),
+   <%= form_tag posts_path, method: :get, class: 'boards__searchForm' do %>
+    <%= select_tag :tag_id, options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]),
                      {
                        prompt: 'タグで絞り込み検索',
                        onchange: 'submit(this.form);'
-                     }
-                      %>
-                    <% end %>
+                     }  
+    %>
+   <% end %>
 
       <% @posts.each do |post| %>
         <div class="column is-4">
@@ -50,9 +49,7 @@
 
               <div class="content">
                 <time><%= post.updated_at.strftime("%Y-%m-%d %H:%M") %></time>更新
-                <p><%= @favorites_count %></p>
-                
-                
+                <p><%= link_to "#{post.favorites.count}いいね", post_path(post.id) %></p>
               </div>
             </div>
           </div>

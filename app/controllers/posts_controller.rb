@@ -3,9 +3,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
-    @posts = Post.all
     @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
-    @favorites_count = Favorite.where(post_id: params[:id]).count
   end
 
   def show
@@ -52,6 +50,7 @@ class PostsController < ApplicationController
 
 
   private
+
   def post_params
     params.require(:post).permit(:title, :body, :image, tag_ids: [])
   end
