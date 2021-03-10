@@ -40,6 +40,24 @@
             <%= f.attachment_field :image, class: "input" %>
           </div>
 
+          <div class="check_box">
+            <span>タグ</span>
+            <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+             <div>
+               <%= tag.label do %>
+                 <%= tag.check_box %>
+                 <%= tag.text %>
+               <% end %>
+             </div>
+           <% end %>
+
+
+          <%#<div class="field">
+          <%= f.text_field :tag_ids,value: @tag_list,\
+          placeholder: "タグをつける。複数つけるには','で区切ってください。"
+          </div>%>
+
+
           <%= f.submit '投稿', class: "button is-success" %>
         <% end %>
       </div>

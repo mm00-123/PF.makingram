@@ -29,22 +29,26 @@
             <div class="content">
               <table class="table is-narrow">
                 <tr>
-                  <th>🌹説明🌹｜ 
+                  <th>🌹説明🌹｜
                   <span><%= link_to "#{@post.post_comments.count} コメント", post_path(@post.id)  %></span>
-                  
-                  
+
+
                           <% if @post.favorited_by?(current_user) %>
-                          
+
                             <%= link_to post_favorites_path(@post), method: :delete do %>
                               ♥<%= @post.favorites.count %> いいね
                             <% end %>
-                          
+
                           <% else %>
-                          
+
                             <%= link_to post_favorites_path(@post), method: :post do %>
                               ♡<%= @post.favorites.count %> いいね
-                            <% end %>
-                          
+                          <% end %>
+
+                        ｜ タグ ⏩｜   <% @post.tags.each do |tag| %>
+                            <%= tag.name %>
+                          <% end %>
+
                         <% end %>
                         </p>
                   </th>
@@ -52,7 +56,7 @@
 
                 <tr>
                   <td><%= simple_format @post.body %>
-                  
+
                         <div class="comments">
                         <p>
                         <% @post.post_comments.each do |post_comment| %>
@@ -65,7 +69,7 @@
                           <% end %>
                           </div>
 
-                          
+
 
                         <% end %>
                         </div>
