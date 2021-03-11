@@ -30,6 +30,9 @@
     <% if user_signed_in? %>
         <div id="navbarExampleTransparentExample" class="navbar-menu">
           <div class="navbar-item">
+            <%= link_to "投稿いいね♡ランキング", ranking_path, class: "navbar-item button is-warning is-light" %>
+          </div>
+          <div class="navbar-item">
             <%= link_to "作品一覧", posts_path, class: "navbar-item button is-warning is-light" %>
           </div>
           <div class="navbar-item">

@@ -9,4 +9,6 @@ Rails.application.routes.draw do
     resources :post_comments, only: [:create, :destroy]
   end
 
+ get '/ranking' => 'posts#ranking'
+
 end
