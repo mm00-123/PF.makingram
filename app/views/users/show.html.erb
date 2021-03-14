@@ -11,7 +11,7 @@
 <section class="section">
   <div class="container">
     <div class="columns is-centered">
-      <div class="column is-8">
+      <div class="column is-6">
         <div class="columns is-centered">
           <div class="column is-4">
             <figure class="image is-128x128"  style="margin-left: auto; margin-right: auto;">
@@ -22,19 +22,69 @@
           <div class="column is-8">
             <table class="table is-fullwidth">
               <tr>
+                
                 <td class="is-size-4">
+                  <tr>
                   <strong><%= @user.username %></strong>
+                  
+                  <p class="is-size-6"><%= "フォロー数: #{@user.follower.count}" %></p>
+                  <p class="is-size-6"><%= "フォロワー数: #{@user.followed.count}" %></p>
+                 <% unless @user == current_user %>
+                  <% if current_user.following?(@user) %>
+                    <%= link_to 'フォロー外す', unfollow_path(@user.id), method: :POST  %>
+                  <% else %>
+                    <%= link_to 'フォローする', follow_path(@user.id), method: :POST %>
+                  <% end %>
+                 <% end %>
                   </td>
                 <% if @user.id == current_user.id %>
                 <td class="is-size-4">
                  <%= @user.email %>
                 </td>
+
                 <td>
                   <%= link_to "編集", edit_user_path(@user), class: "button is-primary" %>
                 </td>
-                <% end %>
+
+
+
+                <td>
+                  <tr>
+          　　　　　　<p class="panel-heading">
+                  フォロー一覧
+                    <% @user.following_user.where.not(id: current_user.id).each do |user| %>
+                      <p>
+                        <%= user.username %>
+                        <%= link_to "show", user_path(user) %>
+                        <% if current_user.following?(user) %>
+                          <%= link_to 'フォロー外す', unfollow_path(user.id), method: :POST %>
+                        <% else %>
+                          <%= link_to 'フォローする', follow_path(user.id), method: :POST %>
+                        <% end %>
+                      </p>
+                    <% end %>
+                    </tr>
+                    <tr>
+                  <p class="panel-heading">
+                  フォロワー一覧
+                    <% @user.follower_user.where.not(id: current_user.id).each do |user| %>
+                      <p>
+                        <%= user.username %>
+                        <%= link_to "show", user_path(user) %>
+                        <% if current_user.following?(user) %>
+                          <%= link_to 'フォロー外す', unfollow_path(user.id), method: :POST %>
+                        <% else %>
+                          <%= link_to 'フォローする', follow_path(user.id), method: :POST %>
+                        <% end %>
+                      </p>
+                      </tr>
+                   <% end %>
+                 </td>
+              <% end %>
               </tr>
             </table>
+            
+            
             <table class="table is-fullwidth">
               <tr>
                 <td>
@@ -72,6 +122,7 @@
                     この作品を見る
                   <% end %>
                   <% if @user.id == current_user.id %>
+
                     <%= link_to edit_post_path(post), class: "panel-block" do %>
                       <span class="panel-icon">
                         <i class="fas fa-edit"></i>
@@ -97,4 +148,3 @@
     </div>
   </div>
 </section>
-
