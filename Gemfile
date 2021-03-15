@@ -35,6 +35,14 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+group :test do
+  gem 'capybara'
+  gem 'rspec-rails'
+  gem "factory_bot_rails"
+  gem 'faker'
+end
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
@@ -59,3 +67,9 @@ gem "refile-mini_magick"
 gem "bulma-rails", "~> 0.9.1"
 
 gem 'kaminari','~> 1.2.1'
+
+
+gem 'dotenv-rails'
+group :production do
+  gem 'mysql2'
+end
