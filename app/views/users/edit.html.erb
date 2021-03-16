@@ -47,6 +47,9 @@
 
           <%= f.submit "更新", class: "button is-success" %>
         <% end %>
+
+        <%= link_to "退会する",user_path(current_user.id), class: "destroy-user", "data-confirm" => "本当に退会しますか？",method: :delete %>
+
       </div>
     </div>
   </div>

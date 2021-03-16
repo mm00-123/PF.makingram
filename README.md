@@ -17,11 +17,6 @@
 自分が作ったものをネットでいろいろな人に共有したい時
 
 
-
-## 設計書
-
-
-
 ### 機能一覧
 https://docs.google.com/spreadsheets/d/1VkA9J4HxJjNNHGy8wxLl76ElQYWDnPKT63s4UWFuLMQ/edit?usp=sharing
 

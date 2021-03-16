@@ -26,6 +26,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user = User.find(params[:id]) #特定のidを持つ情報を取得
+    @user.destroy
+    flash[:notice] = "今までのご利用ありがとうございました！"
+    redirect_to :root
+  end
+
 
 
   private
