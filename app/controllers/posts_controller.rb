@@ -47,12 +47,9 @@ class PostsController < ApplicationController
     redirect_to user_path(post.user)
   end
 
-
   def ranking
     @posts = Post.joins(:favorites).group(:post_id).order('count(post_id) desc')
   end
-
-
 
   private
 

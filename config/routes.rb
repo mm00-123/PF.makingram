@@ -10,7 +10,6 @@ Rails.application.routes.draw do
     resources :post_comments, only: [:create, :destroy]
   end
 
-
  get '/ranking' => 'posts#ranking'
  post 'follow/:id' => 'relationships#follow', as: 'follow' # フォローする
  post 'unfollow/:id' => 'relationships#unfollow', as: 'unfollow' # フォロー外す
